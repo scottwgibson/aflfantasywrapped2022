@@ -1,6 +1,7 @@
-package com.scottwgibson
+package com.scottwgibson.aflfantasywrapped
 
-import com.scottwgibson.plugins.*
+import com.scottwgibson.aflfantasywrapped.plugins.configureRouting
+import com.scottwgibson.aflfantasywrapped.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*

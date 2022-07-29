@@ -8,7 +8,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-val httpClient = HttpClient(CIO) {
+val defaultHttpClient = HttpClient(CIO) {
     install(ContentNegotiation) {
         json(
             Json {
@@ -16,9 +16,7 @@ val httpClient = HttpClient(CIO) {
             }
         )
     }
-    install(HttpHeaders.ContentEncoding) {
-        // gzip()
-    }
+    install(HttpHeaders.ContentEncoding) {}
 
-    install(HttpCache)
+    install(HttpCache) {}
 }

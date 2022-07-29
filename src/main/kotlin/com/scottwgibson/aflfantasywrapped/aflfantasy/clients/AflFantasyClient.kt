@@ -27,7 +27,7 @@ class AflFantasyClient(
     private val baseUrl: String = "https://fantasy.afl.com.au"
 ) {
 
-    val sessionToken = "<session_token>"
+    private val sessionToken = "<token_here>"
     private val json = Json { ignoreUnknownKeys = true }
 
     @Serializable
@@ -40,12 +40,9 @@ class AflFantasyClient(
     suspend fun getPlayers(): Map<Int, Player> {
         val response = client.request("$baseUrl/data/afl/players.json") {
             method = HttpMethod.Get
-            accept(ContentType.parse("application/json"))
         }
 
         return GZIPInputStream(response.bodyAsChannel().toInputStream())
-            .readAllBytes()
-            .inputStream()
             .let { json.decodeFromStream<List<Player>>(it) }
             .associateBy { it.id }
     }
@@ -56,8 +53,9 @@ class AflFantasyClient(
                 method = HttpMethod.Get
                 parameter("id", teamId)
                 round?.let { parameter("round", it) }
-                parameter("_", Instant.now().toEpochMilli())
+                // parameter("_", Instant.now().toEpochMilli())
                 cookie("session", sessionToken)
+                accept(ContentType.parse("application/json"))
             }
 
         return response.body<ResponseDTO<ClassicTeamRound>>().result

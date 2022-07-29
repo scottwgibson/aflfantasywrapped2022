@@ -1,5 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates
 
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.PlayerId
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.ButtonType
@@ -11,25 +12,36 @@ import kotlinx.html.id
 import kotlinx.html.span
 
 class Season2022WrappedTemplate(
-    val teamId: Int
+    val teamId: String,
+    val playerIds: Iterable<PlayerId>
 ) : Template<HTML> {
     override fun HTML.apply() {
         insert(MainTemplate()) {
             body {
                 div {
-                    h1 { +"TeamID: $teamId" }
+                    h1 { +"Team Name: $teamId" }
                 }
-                div(classes = "carousel slide") {
+                div(classes = "carousel carousel-dark slide") {
                     id = "carouselExampleControls"
-                    attributes["data-bs-ride"] = "carousel"
-                    div(classes = "carousel-inner") {
-                        div(classes = "carousel-item active") {
-                            // h1 { +"Test1" }
-                            // img(classes = "d-block w-100", src = "https://placeimg.com/1080/500/animals")
+                    attributes["data-bs-ride"] = "carouselExampleControls"
+                    attributes["data-bs-interval"] = "false"
+                    attributes["data-bs-wrap"] = "false"
+
+                    div(classes = "carousel-indicators") {
+                        playerIds.forEachIndexed { i, it ->
+                            button(classes = "active") {
+                                type = ButtonType.button
+                                attributes["data-bs-target"] = "#carouselExampleControls"
+                                attributes["data-bs-slide-to"] = "$i"
+                                attributes["aria-label"] = "Slide $i"
+                                attributes["aria-current"] = "true"
+                                if (i == 0) attributes["aria-current"] = "true"
+                            }
                         }
-                        div(classes = "carousel-item") {
-                            // h1 { +"Test2" }
-                            // img(classes = "d-block w-100", src = "https://placeimg.com/1080/500/arch")
+                    }
+                    div(classes = "carousel-inner") {
+                        playerIds.forEachIndexed { i, it ->
+                            insert(PlayerCarouselItem(it, i == 0)) {}
                         }
                     }
                     button(classes = "carousel-control-prev") {

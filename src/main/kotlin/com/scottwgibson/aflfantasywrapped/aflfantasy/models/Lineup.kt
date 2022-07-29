@@ -23,4 +23,6 @@ data class Lineup(
     @SerialName("3") val rucks: Set<PlayerId>,
     @SerialName("4") val forwards: Set<PlayerId>,
     val bench: Bench
-)
+) {
+    fun starting22() = defenders + midfielders + rucks + forwards
+}

@@ -34,7 +34,7 @@ class AflFantasyClientTest {
         val client = AflFantasyClient(
             httpClient
         )
-        println(client.getPlayers())
+        println(client.getPlayers().values.first())
     }
 
     @Test

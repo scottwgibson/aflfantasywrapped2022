@@ -9,17 +9,15 @@ import io.ktor.client.request.accept
 import io.ktor.client.request.cookie
 import io.ktor.client.request.parameter
 import io.ktor.client.request.request
-import io.ktor.client.statement.bodyAsChannel
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
-import io.ktor.utils.io.jvm.javaio.toInputStream
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.decodeFromStream
 import java.time.Instant
-import java.util.zip.GZIPInputStream
 
 @ExperimentalSerializationApi
 class AflFantasyClient(
@@ -38,13 +36,13 @@ class AflFantasyClient(
     )
 
     suspend fun getPlayers(): Map<Int, Player> {
-        val response = client.request("$baseUrl/data/afl/players.json") {
-            method = HttpMethod.Get
-        }
+        return withContext(Dispatchers.IO) {
+            val response = client.request("$baseUrl/data/afl/players.json") {
+                method = HttpMethod.Get
+            }
 
-        return GZIPInputStream(response.bodyAsChannel().toInputStream())
-            .let { json.decodeFromStream<List<Player>>(it) }
-            .associateBy { it.id }
+            response.body<List<Player>>().associateBy { it.id }
+        }
     }
 
     suspend fun getClassicTeam(teamId: Int, round: Int? = null): ClassicTeamRound {
@@ -53,7 +51,7 @@ class AflFantasyClient(
                 method = HttpMethod.Get
                 parameter("id", teamId)
                 round?.let { parameter("round", it) }
-                // parameter("_", Instant.now().toEpochMilli())
+                parameter("_", Instant.now().toEpochMilli())
                 cookie("session", sessionToken)
                 accept(ContentType.parse("application/json"))
             }

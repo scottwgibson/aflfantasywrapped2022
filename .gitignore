@@ -1,11 +1,25 @@
-/.gradle
-/.idea
-/out
-/build
-*.iml
-*.ipr
-*.iws
+out
+gen
 
-# Ignore temporary kubectl files
-.kubectl.out
-.kubectl.pid
+/build
+.gradle
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/bower_components
+
+# IDEs and editors
+/.idea
+*iml
+.project
+.classpath
+*.launch
+.settings/
+
+
+#System Files
+.DS_Store
+Thumbs.db

@@ -7,6 +7,7 @@ import io.ktor.client.HttpClient
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.html.respondHtmlTemplate
+import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -26,7 +27,7 @@ fun Application.module(
             val teamId = call.parameters["teamId"]?.toInt()
 
             if (teamId != null) {
-                server.showWrapupForUser(call, teamId)
+                call.respondRedirect("/2022/$teamId")
             } else {
                 call.respondHtmlTemplate(Home2022Page()) {}
             }

@@ -13,13 +13,11 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import java.time.Instant
 
-@ExperimentalSerializationApi
 class AflFantasyClient(
     private val client: HttpClient,
     private val baseUrl: String = "https://fantasy.afl.com.au"

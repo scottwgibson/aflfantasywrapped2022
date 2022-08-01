@@ -11,7 +11,7 @@ import kotlinx.html.h1
 import kotlinx.html.id
 import kotlinx.html.span
 
-class Season2022WrappedTemplate(
+class TestWrappedTemplate(
     val teamId: String,
     val playerIds: Iterable<PlayerId>
 ) : Template<HTML> {

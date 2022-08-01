@@ -1,6 +1,5 @@
 package com.scottwgibson.aflfantasywrapped.aflfantasy.models
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,7 +23,6 @@ data class PlayerStats(
     @SerialName("leagues_rostered") val leaguesRosteredPct: Float
 )
 
-@ExperimentalSerializationApi
 @Serializable
 data class Player(
     val id: Int,

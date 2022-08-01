@@ -9,14 +9,12 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.junit.Test
 import java.io.ByteArrayOutputStream
 import java.util.zip.GZIPOutputStream
 import kotlin.test.assertEquals
 
-@ExperimentalSerializationApi
 class AflFantasyClientTest {
 
     private val playersJson = this::class.java.classLoader.getResource("players.json")

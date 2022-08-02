@@ -19,8 +19,7 @@ class AflFantasyClientTest {
 
     private val playersJson = this::class.java.classLoader.getResource("players.json")
         ?.let {
-            val bytes = this::class.java.classLoader.getResource("players.json")?.openStream()?.readAllBytes()
-                ?: throw Exception()
+            val bytes = it.openStream()?.readAllBytes() ?: throw Exception()
             val out = ByteArrayOutputStream()
             val gzip = GZIPOutputStream(out)
             gzip.write(bytes)

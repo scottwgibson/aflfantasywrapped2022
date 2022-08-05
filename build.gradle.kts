@@ -6,6 +6,7 @@ plugins {
     application
     kotlin("jvm") version "1.7.10"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.10"
 }
 
 group = "com.scottwgibson"
@@ -44,4 +45,5 @@ dependencies {
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }

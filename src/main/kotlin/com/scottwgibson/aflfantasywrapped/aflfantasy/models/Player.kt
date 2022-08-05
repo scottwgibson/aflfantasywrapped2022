@@ -35,6 +35,10 @@ data class Player(
     val stats: PlayerStats
 )
 
+fun Player.roundScore(round: Int): Int? = stats.scores[round.toString()]
+
+fun Player.name() = "$firstName $lastName"
+
 /*
 {
 

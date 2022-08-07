@@ -1,4 +1,4 @@
-package com.scottwgibson.aflfantasywrapped.templates.insights
+package com.scottwgibson.aflfantasywrapped.templates.wrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
 import com.scottwgibson.aflfantasywrapped.services.WrappedData

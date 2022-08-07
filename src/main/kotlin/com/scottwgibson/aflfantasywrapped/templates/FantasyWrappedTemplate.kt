@@ -1,8 +1,8 @@
 package com.scottwgibson.aflfantasywrapped.templates
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
-import com.scottwgibson.aflfantasywrapped.templates.insights.MostPopularCaptainCarouselItem
-import com.scottwgibson.aflfantasywrapped.templates.insights.WelcomeCarouselItem
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.MostPopularCaptainCarouselItem
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.WelcomeCarouselItem
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.ButtonType

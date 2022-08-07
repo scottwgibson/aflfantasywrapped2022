@@ -23,13 +23,14 @@ fun Application.module(
     val server = Server(AflFantasyClient(httpClient))
 
     routing {
+        get {
+            call.respondHtmlTemplate(Home2022Page()) {}
+        }
+
         get("/2022") {
             val teamId = call.parameters["teamId"]?.toInt()
-
             if (teamId != null) {
                 call.respondRedirect("/2022/$teamId")
-            } else {
-                call.respondHtmlTemplate(Home2022Page()) {}
             }
         }
 

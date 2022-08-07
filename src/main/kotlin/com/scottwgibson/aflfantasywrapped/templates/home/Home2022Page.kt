@@ -1,5 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates.home
 
+import com.scottwgibson.aflfantasywrapped.templates.Header
 import com.scottwgibson.aflfantasywrapped.templates.MainTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
@@ -13,6 +14,7 @@ class Home2022Page() : Template<HTML> {
     override fun HTML.apply() {
         insert(MainTemplate()) {
             body {
+                insert(Header()) {}
                 div(classes = "container mt-4") {
                     div(classes = "row justify-content-center") {
                         div(classes = "col-md-8") {

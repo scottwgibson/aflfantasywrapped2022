@@ -2,6 +2,8 @@ package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamRound
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonTradeData
 import com.scottwgibson.aflfantasywrapped.services.FantasyWrappedService
 import com.scottwgibson.aflfantasywrapped.templates.FantasyWrappedTemplate
 import io.ktor.server.application.ApplicationCall
@@ -30,15 +32,22 @@ class Server(
             println("${i + 1}: ${captain?.firstName} ${captain?.lastName}")
         }
 
+        val loophole = SeasonCaptainData(players, rounds)
+        println("*****")
+        println("Team name: ${team.name}")
+        println("Times loophole used: ${loophole.timesLoopholeUsed()}")
+        loophole.roundCaptains.values.filter { it.loopholeUsed() }
+            .forEach { println("Round ${it.round}: ${it.viceCaptain.lastName} looped by ${it.captain.lastName}") }
+
+        val tradeData = SeasonTradeData(players, rounds)
         // Create wrapped
         val wrapped = FantasyWrappedService.createWrapped(players, rounds, snapshot)
         // Render
         call.respondHtmlTemplate(FantasyWrappedTemplate(wrapped)) {}
-        // call.respondHtmlTemplate(TestWrappedTemplate(snapshot.name, team.lineup.starting22())) {}
     }
 
     private suspend fun getAllRounds(teamId: Int): Map<Int, ClassicTeamRound> = coroutineScope {
-        val rounds = (1..20).map {
+        val rounds = (1..21).map {
             async(start = CoroutineStart.LAZY) {
                 logger.info("$it")
                 Pair(it, aflFantasyClient.getClassicTeam(teamId, it))

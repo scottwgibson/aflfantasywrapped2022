@@ -13,8 +13,8 @@ class MostPopularCaptainCarouselItem(
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
         val data = SeasonCaptainData(wrappedData.playerStats, wrappedData.rounds)
-        val player = data.mostUsedCaptains().first().first
-        val selections = data.mostUsedCaptains().first().second.count()
+        val player = data.orderedByUsedDesc().first().first
+        val selections = data.orderedByUsedDesc().first().second.count()
 
         div(classes = "carousel-item") {
             div(classes = "d-flex align-items-center justify-content-center min-vh-100") {

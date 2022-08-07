@@ -4,16 +4,17 @@ import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamRound
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamSnapshot
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.Player
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.PlayerId
-import kotlinx.serialization.ExperimentalSerializationApi
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonTradeData
 
-@OptIn(ExperimentalSerializationApi::class)
 data class WrappedData(
     val playerStats: Map<PlayerId, Player>,
     val rounds: Map<Int, ClassicTeamRound>,
-    val snapshot: ClassicTeamSnapshot
+    val snapshot: ClassicTeamSnapshot,
+    val captainData: SeasonCaptainData,
+    val seasonTradeData: SeasonTradeData
 )
 
-@OptIn(ExperimentalSerializationApi::class)
 object FantasyWrappedService {
     fun createWrapped(
         playerData: Map<PlayerId, Player>,
@@ -23,7 +24,9 @@ object FantasyWrappedService {
         return WrappedData(
             playerData,
             rounds,
-            snapshot
+            snapshot,
+            SeasonCaptainData(playerData, rounds),
+            SeasonTradeData(playerData, rounds)
         )
     }
 }

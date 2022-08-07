@@ -12,7 +12,9 @@ data class Bench(
     @SerialName("3") val rucks: Set<PlayerId> = emptySet(),
     @SerialName("4") val forwards: Set<PlayerId> = emptySet(),
     val emergency: Set<PlayerId> = emptySet()
-)
+) {
+    fun toSet(): Set<PlayerId> = defenders + midfielders + rucks + forwards
+}
 
 @Serializable
 data class Lineup(
@@ -24,5 +26,7 @@ data class Lineup(
     @SerialName("4") val forwards: Set<PlayerId> = emptySet(),
     val bench: Bench = Bench()
 ) {
-    fun starting22() = defenders + midfielders + rucks + forwards
+    fun starting22(): Set<PlayerId> = defenders + midfielders + rucks + forwards
+
+    fun toSet(): Set<PlayerId> = starting22() + bench.toSet()
 }

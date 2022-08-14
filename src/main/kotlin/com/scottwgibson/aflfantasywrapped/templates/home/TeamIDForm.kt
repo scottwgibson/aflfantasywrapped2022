@@ -10,7 +10,7 @@ import kotlinx.html.input
 
 class TeamIDForm : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
-        form(action = "/2022") {
+        form(action = "/team") {
             div(classes = "form-group") {
                 div(classes = "input-group") {
                     input(classes = "form-control-lg", type = InputType.text, name = "teamId") {

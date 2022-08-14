@@ -7,12 +7,13 @@ plugins {
     kotlin("jvm") version "1.7.10"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.7.10"
+    id("io.ktor.plugin") version "2.1.0"
 }
 
 group = "com.scottwgibson"
 version = "0.0.1"
 application {
-    mainClass.set("com.scottwgibson.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")

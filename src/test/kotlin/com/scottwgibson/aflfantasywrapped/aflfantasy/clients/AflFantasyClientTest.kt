@@ -1,9 +1,13 @@
 package com.scottwgibson.aflfantasywrapped.aflfantasy.clients
 
+import io.ktor.client.plugins.cache.*
+import io.ktor.client.plugins.compression.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.http.ContentType
+import io.ktor.client.plugins.logging.*
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.call
+import io.ktor.server.config.*
 import io.ktor.server.response.respondBytes
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
@@ -19,12 +23,7 @@ class AflFantasyClientTest {
 
     private val playersJson = this::class.java.classLoader.getResource("players.json")
         ?.let {
-            val bytes = it.openStream()?.readAllBytes() ?: throw Exception()
-            val out = ByteArrayOutputStream()
-            val gzip = GZIPOutputStream(out)
-            gzip.write(bytes)
-            gzip.close()
-            out.toByteArray()
+            it.openStream()?.readAllBytes()?.decodeToString() ?: throw Exception()
         } ?: throw Exception("Couldn't load players.json")
 
     private val roundsJson = (1..20)
@@ -37,13 +36,17 @@ class AflFantasyClientTest {
         }
 
     private val snapshotJson = this::class.java.classLoader.getResource("snapshot.json")
-        .openStream()
+        ?.openStream()
         ?.readAllBytes()
         ?.decodeToString() ?: throw Exception("Couldn't load snapshot.json")
 
     @Test
-    fun testPlayerReceive() {
+    fun `basic client test`() {
         testApplication {
+            environment {
+                config = MapApplicationConfig("aflfantasyclient.session" to "test")
+            }
+
             val client = createClient {
                 install(ContentNegotiation) {
                     json(
@@ -58,7 +61,7 @@ class AflFantasyClientTest {
                 hosts("https://testclient.com.au") {
                     routing {
                         get("/data/afl/players.json") {
-                            call.respondBytes { playersJson }
+                            call.respondText (ContentType.parse("application/json")) { playersJson }
                         }
                         get("/afl_classic/api/teams_classic/show") {
                             if (call.parameters["id"] == "10192") {
@@ -75,7 +78,7 @@ class AflFantasyClientTest {
                     }
                 }
             }
-            val aflClient = AflFantasyClient(client, "https://testclient.com.au")
+            val aflClient = AflFantasyClient(client, AflFantasyClientConfig("test", "https://testclient.com.au"))
             assertEquals(aflClient.getPlayers()[296205]?.firstName, "Jack")
             assertEquals(aflClient.getClassicTeam(10192).firstName, "Scott")
             assertEquals(aflClient.getClassicTeamSnapshot(1758489).lastName, "Gibson")

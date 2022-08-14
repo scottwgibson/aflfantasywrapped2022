@@ -1,6 +1,7 @@
 package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
+import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClientConfig
 import com.scottwgibson.aflfantasywrapped.plugins.configureSerialization
 import com.scottwgibson.aflfantasywrapped.templates.home.Home2022Page
 import io.ktor.client.HttpClient
@@ -16,25 +17,26 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @OptIn(ExperimentalSerializationApi::class)
 fun Application.module(
-    httpClient: HttpClient = defaultHttpClient
+    httpClient: HttpClient = defaultHttpClient,
+    aflFantasyClientConfig: AflFantasyClientConfig,
 ) {
     configureSerialization()
 
-    val server = Server(AflFantasyClient(httpClient))
+    val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig))
 
     routing {
         get {
             call.respondHtmlTemplate(Home2022Page()) {}
         }
 
-        get("/2022") {
+        get("/team") {
             val teamId = call.parameters["teamId"]?.toInt()
             if (teamId != null) {
-                call.respondRedirect("/2022/$teamId")
+                call.respondRedirect("/team/$teamId")
             }
         }
 
-        get("/2022/{teamId}") {
+        get("/team/{teamId}") {
             val teamId = call.parameters["teamId"]?.toInt()!!
             server.showWrapupForUser(call, teamId)
         }

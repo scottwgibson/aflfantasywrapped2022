@@ -2,8 +2,9 @@ package com.scottwgibson.aflfantasywrapped.templates
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.WelcomeCarouselItem
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.HighestScoreCaptainsTemplate
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.HighestCaptainsScoreTemplate
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostPopularCaptainCarouselItem
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostUsedLoopholeTemplate
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.TopCaptainSelectionTemplate
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.SeasonSquadTemplate
 import io.ktor.server.html.Template
@@ -23,7 +24,7 @@ class CarouselItem<T : Template<HtmlBlockTag>>(
     override fun HtmlBlockTag.apply() {
         val classes = if (active) "carousel-item active" else "carousel-item"
         div(classes = classes) {
-            div(classes = "d-flex align-items-center justify-content-center min-vh-100") {
+            div(classes = "d-flex flex-column justify-content-center min-vh-100") {
                 insert(type) {}
             }
         }
@@ -36,9 +37,10 @@ class FantasyWrappedTemplate(
     override fun HTML.apply() {
         insert(MainTemplate()) {
             body {
-                div(classes = "container") {
+                div(classes = "container-fluid") {
+                    attributes["max-width"] = "600px"
                     div(classes = "row") {
-                        div(classes = "col") {
+                        div(classes = "col min-vh-100") {
                             div(classes = "carousel carousel-dark slide") {
                                 id = "wrappedCarousel"
                                 attributes["data-bs-ride"] = "wrappedCarousel"
@@ -46,12 +48,13 @@ class FantasyWrappedTemplate(
                                 attributes["data-bs-wrap"] = "false"
 
                                 div(classes = "carousel-inner bg-info") {
-                                    attributes["style"] = "padding-left: 10%; padding-right: 10%;"
+                                    attributes["style"] = "padding-left: 5%; padding-right: 5%;"
                                     insert(CarouselItem(WelcomeCarouselItem(wrappedData), true)) {}
                                     insert(CarouselItem(MostPopularCaptainCarouselItem(wrappedData))) {}
                                     insert(CarouselItem(TopCaptainSelectionTemplate(wrappedData.captainData))) {}
-                                    insert(CarouselItem(HighestScoreCaptainsTemplate(wrappedData.captainData))) {}
+                                    insert(CarouselItem(HighestCaptainsScoreTemplate(wrappedData.captainData))) {}
                                     insert(CarouselItem(SeasonSquadTemplate(wrappedData))) {}
+                                    insert(CarouselItem(MostUsedLoopholeTemplate(wrappedData.captainData))) {}
                                 }
                                 button(classes = "carousel-control-prev") {
                                     type = ButtonType.button

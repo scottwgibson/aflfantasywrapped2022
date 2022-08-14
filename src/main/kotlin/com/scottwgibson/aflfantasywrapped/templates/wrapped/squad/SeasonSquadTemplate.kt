@@ -11,16 +11,12 @@ class SeasonSquadTemplate(
     val wrappedData: WrappedData
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
-        // val players =
-        //     wrappedData.rounds.entries.fold(emptySet<PlayerId>()) { set, entry -> set.plus(entry.value.lineup.toSet()) }
-        //         .mapNotNull { wrappedData.playerStats[it] }
-
         val players = wrappedData.rounds.values.first().lineup.toSet()
 
         div(classes = "container") {
             div("row") {
                 div("col text-center") {
-                    h1 { +"Your Starting 22" }
+                    h1 { +"Your Starting Squad" }
                 }
             }
             players.chunked(5)

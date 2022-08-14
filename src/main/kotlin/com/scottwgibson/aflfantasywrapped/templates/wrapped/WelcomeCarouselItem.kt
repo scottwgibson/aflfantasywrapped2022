@@ -9,7 +9,7 @@ class WelcomeCarouselItem(
     val wrappedData: WrappedData
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
-
-        p(classes = "text-center fs-2 w-75") { +"Welcome ${wrappedData.snapshot.name}, this is your unofficial AFL Fantasy Classic 2022 Wrapped" }
+        p(classes = "text-center fs-2 ") { +wrappedData.snapshot.name }
+        p(classes = "text-center fs-2") { +"This is your unofficial AFL Fantasy Classic 2022 Wrapped" }
     }
 }

@@ -8,20 +8,25 @@ import kotlinx.html.HtmlBlockTag
 import kotlinx.html.div
 import kotlinx.html.h1
 
-class TopCaptainSelectionTemplate(
+class HighestCaptainsScoreTemplate(
     private val captainData: SeasonCaptainData
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
         div(classes = "container text-center") {
             div(classes = "row") {
                 div(classes = "col text-center") {
-                    h1 { +"Most Used Captains" }
+                    h1 { +"Highest Captain Scores" }
                 }
             }
-            captainData.orderedByUsedDesc().take(5).forEachIndexed { i, player ->
-                insert(CaptainRowTemplate(player.first)) {
-                    Column1 { +"#${i + 1}" }
-                    Column3 { +"${player.first.name()} (${player.second.size})" }
+
+            captainData.orderedByScoreDesc().take(5).forEachIndexed { i, it ->
+                val score = it.finalCaptainScore()
+                val selectedAs = if (it.loopholeUsed()) "VC" else "C"
+                val round = it.round
+                val bracketData = "R$round $selectedAs"
+                insert(CaptainRowTemplate(it.finalCaptain())) {
+                    Column1 { +"$score" }
+                    Column3 { +"${player.name()} $bracketData" }
                 }
             }
         }

@@ -28,18 +28,4 @@ class MostPopularCaptainCarouselItem(
             }
         }
     }
-
-    // div(classes = "d-flex align-items-center justify-content-center max-vh-100") {
-    //     div(classes = "container text-center") {
-    //         div(classes = "row") {
-    //             div(classes = "col") {
-    //                 val url = "https://fantasy.afl.com.au/assets/media/players/afl/${player.id}_450.webp"
-    //                 img(classes = "d-block w-100", src = url)
-    //                 p(classes = "text-center fs-2") {
-    //                     +"${player.firstName} ${player.lastName} was your most selected captain for a total of $selections times."
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 }

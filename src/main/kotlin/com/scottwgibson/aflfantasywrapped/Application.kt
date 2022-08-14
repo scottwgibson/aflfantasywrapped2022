@@ -11,11 +11,10 @@ import io.ktor.server.html.respondHtmlTemplate
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import kotlinx.serialization.ExperimentalSerializationApi
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@OptIn(ExperimentalSerializationApi::class)
+
 fun Application.module(
     httpClient: HttpClient = defaultHttpClient,
     aflFantasyClientConfig: AflFantasyClientConfig,

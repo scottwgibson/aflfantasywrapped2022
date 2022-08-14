@@ -22,24 +22,12 @@ class Server(
 
     private val logger = LoggerFactory.getLogger("Server")
     suspend fun showWrapupForUser(call: ApplicationCall, teamId: Int) {
+
         val players = aflFantasyClient.getPlayers()
         val team = aflFantasyClient.getClassicTeam(teamId)
         val rounds = getAllRounds(teamId)
         val snapshot = aflFantasyClient.getClassicTeamSnapshot(team.userId)
 
-        rounds.values.forEachIndexed { i, it ->
-            val captain = players[it.lineup.captain]
-            println("${i + 1}: ${captain?.firstName} ${captain?.lastName}")
-        }
-
-        val loophole = SeasonCaptainData(players, rounds)
-        println("*****")
-        println("Team name: ${team.name}")
-        println("Times loophole used: ${loophole.timesLoopholeUsed()}")
-        loophole.roundCaptains.values.filter { it.loopholeUsed() }
-            .forEach { println("Round ${it.round}: ${it.viceCaptain.lastName} looped by ${it.captain.lastName}") }
-
-        val tradeData = SeasonTradeData(players, rounds)
         // Create wrapped
         val wrapped = FantasyWrappedService.createWrapped(players, rounds, snapshot)
         // Render

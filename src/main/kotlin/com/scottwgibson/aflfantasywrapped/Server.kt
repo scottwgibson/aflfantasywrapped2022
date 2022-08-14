@@ -2,8 +2,6 @@ package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamRound
-import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
-import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonTradeData
 import com.scottwgibson.aflfantasywrapped.services.FantasyWrappedService
 import com.scottwgibson.aflfantasywrapped.templates.FantasyWrappedTemplate
 import io.ktor.server.application.ApplicationCall
@@ -22,7 +20,6 @@ class Server(
 
     private val logger = LoggerFactory.getLogger("Server")
     suspend fun showWrapupForUser(call: ApplicationCall, teamId: Int) {
-
         val players = aflFantasyClient.getPlayers()
         val team = aflFantasyClient.getClassicTeam(teamId)
         val rounds = getAllRounds(teamId)

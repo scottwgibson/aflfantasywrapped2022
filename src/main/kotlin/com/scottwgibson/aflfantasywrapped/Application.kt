@@ -1,7 +1,7 @@
 package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
-import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClientConfig
+import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.aflFantasyClientConfig
 import com.scottwgibson.aflfantasywrapped.plugins.configureSerialization
 import com.scottwgibson.aflfantasywrapped.templates.home.Home2022Page
 import io.ktor.client.HttpClient
@@ -14,13 +14,12 @@ import io.ktor.server.routing.routing
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-
 fun Application.module(
-    httpClient: HttpClient = defaultHttpClient,
-    aflFantasyClientConfig: AflFantasyClientConfig,
+    httpClient: HttpClient = defaultHttpClient
 ) {
     configureSerialization()
 
+    val aflFantasyClientConfig = environment.config.aflFantasyClientConfig()
     val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig))
 
     routing {

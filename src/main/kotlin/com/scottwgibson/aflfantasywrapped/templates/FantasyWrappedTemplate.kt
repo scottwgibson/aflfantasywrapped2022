@@ -6,30 +6,18 @@ import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.HighestCapt
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostPopularCaptainCarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostUsedLoopholeTemplate
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.TopCaptainSelectionTemplate
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.SeasonSquadTemplate
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.rank.RankCarouselSection
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.SquadCarouselSection
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.StartingSquadTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.ButtonType
 import kotlinx.html.HTML
-import kotlinx.html.HtmlBlockTag
 import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.id
 import kotlinx.html.span
-
-class CarouselItem<T : Template<HtmlBlockTag>>(
-    private val type: T,
-    private val active: Boolean = false
-) : Template<HtmlBlockTag> {
-    override fun HtmlBlockTag.apply() {
-        val classes = if (active) "carousel-item active" else "carousel-item"
-        div(classes = classes) {
-            div(classes = "d-flex flex-column justify-content-center min-vh-100") {
-                insert(type) {}
-            }
-        }
-    }
-}
 
 class FantasyWrappedTemplate(
     val wrappedData: WrappedData
@@ -41,19 +29,21 @@ class FantasyWrappedTemplate(
                     attributes["max-width"] = "600px"
                     div(classes = "row") {
                         div(classes = "col min-vh-100") {
-                            div(classes = "carousel carousel-dark slide") {
+                            div(classes = "carousel slide") {
                                 id = "wrappedCarousel"
                                 attributes["data-bs-ride"] = "wrappedCarousel"
                                 attributes["data-bs-interval"] = "false"
                                 attributes["data-bs-wrap"] = "false"
 
-                                div(classes = "carousel-inner bg-info") {
-                                    attributes["style"] = "padding-left: 5%; padding-right: 5%;"
+                                div(classes = "carousel-inner") {
+                                    attributes["style"] = "padding-left: 8%; padding-right: 8%;"
                                     insert(CarouselItem(WelcomeCarouselItem(wrappedData), true)) {}
+                                    insert(RankCarouselSection(wrappedData)) {}
+                                    insert(SquadCarouselSection(wrappedData)) {}
                                     insert(CarouselItem(MostPopularCaptainCarouselItem(wrappedData))) {}
                                     insert(CarouselItem(TopCaptainSelectionTemplate(wrappedData.captainData))) {}
                                     insert(CarouselItem(HighestCaptainsScoreTemplate(wrappedData.captainData))) {}
-                                    insert(CarouselItem(SeasonSquadTemplate(wrappedData))) {}
+                                    insert(CarouselItem(StartingSquadTemplate(wrappedData))) {}
                                     insert(CarouselItem(MostUsedLoopholeTemplate(wrappedData.captainData))) {}
                                 }
                                 button(classes = "carousel-control-prev") {

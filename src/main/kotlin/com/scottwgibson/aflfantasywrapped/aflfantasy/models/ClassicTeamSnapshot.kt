@@ -15,7 +15,8 @@ data class ClassicTeamSnapshot(
     val rank: Int,
     @SerialName("round_rank") val roundRank: Int,
     @SerialName("rank_history") val roundHistory: Map<String, Int>,
-    @SerialName("round_rank_history") val roundRankHistory: Map<String, Int>
+    @SerialName("round_rank_history") val roundRankHistory: Map<String, Int>,
+    @SerialName("num_teams") val numTeams: Int
 )
 
 /*

@@ -2,6 +2,7 @@ package com.scottwgibson.aflfantasywrapped.templates.wrapped.captains
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.name
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.PlayerRowTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
@@ -20,9 +21,9 @@ class MostUsedLoopholeTemplate(
             }
 
             captainData.orderedByLoopholeDesc().take(5).forEachIndexed { i, player ->
-                insert(CaptainRowTemplate(player.first)) {
-                    Column1 { +"${player.second.size}" }
-                    Column3 { +player.first.name() }
+                insert(PlayerRowTemplate(player.first)) {
+                    column1 { +"${player.second.size}" }
+                    column4 { +player.first.name() }
                 }
             }
         }

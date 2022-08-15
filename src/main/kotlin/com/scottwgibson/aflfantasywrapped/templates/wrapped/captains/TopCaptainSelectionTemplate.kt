@@ -1,7 +1,7 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.captains
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
-import com.scottwgibson.aflfantasywrapped.aflfantasy.models.name
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.PlayerRowTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
@@ -19,9 +19,9 @@ class TopCaptainSelectionTemplate(
                 }
             }
             captainData.orderedByUsedDesc().take(5).forEachIndexed { i, player ->
-                insert(CaptainRowTemplate(player.first)) {
-                    Column1 { +"#${i + 1}" }
-                    Column3 { +"${player.first.name()} (${player.second.size})" }
+                insert(PlayerRowTemplate(player.first)) {
+                    column1 { +"#${i + 1}" }
+                    column4 { +"${player.second.size}" }
                 }
             }
         }

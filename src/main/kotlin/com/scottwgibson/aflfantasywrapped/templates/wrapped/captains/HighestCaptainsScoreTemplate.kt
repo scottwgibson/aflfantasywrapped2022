@@ -1,7 +1,7 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.captains
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
-import com.scottwgibson.aflfantasywrapped.aflfantasy.models.name
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.PlayerRowTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
@@ -24,9 +24,9 @@ class HighestCaptainsScoreTemplate(
                 val selectedAs = if (it.loopholeUsed()) "VC" else "C"
                 val round = it.round
                 val bracketData = "R$round $selectedAs"
-                insert(CaptainRowTemplate(it.finalCaptain())) {
-                    Column1 { +"$score" }
-                    Column3 { +"${player.name()} $bracketData" }
+                insert(PlayerRowTemplate(it.finalCaptain())) {
+                    column1 { +"$score" }
+                    column4 { +bracketData }
                 }
             }
         }

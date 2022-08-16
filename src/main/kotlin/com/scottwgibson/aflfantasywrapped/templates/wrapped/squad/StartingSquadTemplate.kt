@@ -1,6 +1,7 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.squad
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.PlayerGridTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
@@ -19,7 +20,7 @@ class StartingSquadTemplate(
                     h1 { +"Your Starting Squad" }
                 }
             }
-            insert(SquadImagesTemplate(players, 5)) {}
+            insert(PlayerGridTemplate(players, 5)) {}
         }
     }
 }

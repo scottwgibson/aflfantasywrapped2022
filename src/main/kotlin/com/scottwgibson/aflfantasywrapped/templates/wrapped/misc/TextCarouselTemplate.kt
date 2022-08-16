@@ -11,7 +11,7 @@ class TextCarouselTemplate(
 
     override fun HtmlBlockTag.apply() {
         div(classes = "text-center") {
-            p(classes = "fs-3") { +text }
+            p(classes = "fs-2") { +text }
         }
     }
 }

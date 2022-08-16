@@ -20,6 +20,8 @@ class SeasonCaptainData(
 
     fun orderedByScoreDesc() = roundCaptains.values.sortedByDescending { it.finalCaptainScore() }
 
+    fun orderedByScoreAsc() = roundCaptains.values.sortedBy { it.finalCaptainScore() }
+
     fun orderedByUsedDesc() = roundCaptains.values.groupBy { it.finalCaptain() }
         .toList()
         .sortedByDescending { it.second.count() }

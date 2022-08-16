@@ -13,7 +13,9 @@ data class WrappedData(
     val snapshot: ClassicTeamSnapshot,
     val captainData: SeasonCaptainData,
     val seasonTradeData: SeasonTradeData
-)
+) {
+    val userId = rounds.values.first().userId
+}
 
 object FantasyWrappedService {
     fun createWrapped(

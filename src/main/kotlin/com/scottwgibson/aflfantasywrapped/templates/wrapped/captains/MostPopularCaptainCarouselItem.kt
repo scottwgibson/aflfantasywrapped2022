@@ -21,7 +21,7 @@ class MostPopularCaptainCarouselItem(
                 div(classes = "col col-lg-4") {
                     val url = "https://fantasy.afl.com.au/assets/media/players/afl/${player.id}_450.webp"
                     img(classes = "d-block w-100", src = url)
-                    p(classes = "text-center fs-2") {
+                    p(classes = "text-center") {
                         +"${player.firstName} ${player.lastName} was your most selected captain for a total of $selections times."
                     }
                 }

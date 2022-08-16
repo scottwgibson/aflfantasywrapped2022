@@ -2,14 +2,10 @@ package com.scottwgibson.aflfantasywrapped.templates
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.WelcomeCarouselItem
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.HighestCaptainsScoreTemplate
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostPopularCaptainCarouselItem
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.MostUsedLoopholeTemplate
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.TopCaptainSelectionTemplate
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.CaptainCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.rank.RankCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.SquadCarouselSection
-import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.StartingSquadTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.ButtonType
@@ -25,8 +21,7 @@ class FantasyWrappedTemplate(
     override fun HTML.apply() {
         insert(MainTemplate()) {
             body {
-                div(classes = "container-fluid") {
-                    attributes["max-width"] = "600px"
+                div(classes = "container-fluid wrapped-container text-white") {
                     div(classes = "row") {
                         div(classes = "col min-vh-100") {
                             div(classes = "carousel slide") {
@@ -40,11 +35,8 @@ class FantasyWrappedTemplate(
                                     insert(CarouselItem(WelcomeCarouselItem(wrappedData), true)) {}
                                     insert(RankCarouselSection(wrappedData)) {}
                                     insert(SquadCarouselSection(wrappedData)) {}
-                                    insert(CarouselItem(MostPopularCaptainCarouselItem(wrappedData))) {}
-                                    insert(CarouselItem(TopCaptainSelectionTemplate(wrappedData.captainData))) {}
-                                    insert(CarouselItem(HighestCaptainsScoreTemplate(wrappedData.captainData))) {}
-                                    insert(CarouselItem(StartingSquadTemplate(wrappedData))) {}
-                                    insert(CarouselItem(MostUsedLoopholeTemplate(wrappedData.captainData))) {}
+                                    insert(CaptainCarouselSection(wrappedData)) {}
+
                                 }
                                 button(classes = "carousel-control-prev") {
                                     type = ButtonType.button

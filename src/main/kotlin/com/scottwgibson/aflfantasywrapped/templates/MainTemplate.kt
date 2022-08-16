@@ -50,6 +50,11 @@ class MainTemplate : Template<HTML> {
             link(rel = "stylesheet") {
                 href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/brands.min.css"
             }
+
+            // Custom styling
+            link(rel = "stylesheet") {
+                href = "/static/css/styles.css"
+            }
         }
         body {
             insert(body)

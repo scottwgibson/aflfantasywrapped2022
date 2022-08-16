@@ -1,6 +1,7 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.squad
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.PlayerGridTemplate
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
@@ -19,7 +20,7 @@ class RemainingStartingSquadTemplate(
         div(classes = "container") {
             div("row") {
                 div("col text-center") {
-                    h1 { +"Survivors" }
+                    h1 { +"Your Survivors" }
                 }
             }
             val size = players.size
@@ -29,7 +30,7 @@ class RemainingStartingSquadTemplate(
                 else -> 5
             }
 
-            insert(SquadImagesTemplate(players, cols)) {}
+            insert(PlayerGridTemplate(players, cols)) {}
         }
     }
 }

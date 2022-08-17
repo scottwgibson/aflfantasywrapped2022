@@ -32,7 +32,7 @@ class Server(
     }
 
     private suspend fun getAllRounds(teamId: Int): Map<Int, ClassicTeamRound> = coroutineScope {
-        val rounds = (1..21).map {
+        val rounds = (1..23).map {
             async(start = CoroutineStart.LAZY) {
                 logger.info("$it")
                 Pair(it, aflFantasyClient.getClassicTeam(teamId, it))

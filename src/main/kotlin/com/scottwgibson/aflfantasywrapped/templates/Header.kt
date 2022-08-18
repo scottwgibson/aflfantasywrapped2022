@@ -4,14 +4,36 @@ import io.ktor.server.html.Template
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.a
 import kotlinx.html.div
-import kotlinx.html.nav
+import kotlinx.html.header
+import kotlinx.html.li
+import kotlinx.html.main
+import kotlinx.html.span
+import kotlinx.html.ul
 
 class Header : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
-        nav(classes = "navbar navbar-expand-lg navbar-dark bg-dark") {
-            div(classes = "container-fluid") {
-                a(classes = "navbar-brand") {
-                    href = "/"
+        main {
+            div("container-fluid p-0") {
+                header("d-flex flex-wrap justify-content-center p-3 bg-dark text-white") {
+                    a(
+                        href = "/",
+                        classes = "d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+                    ) {
+                        // vg("bi me-2", "#bootstrap")
+                        span("fs-5") { +"2022 Unofficial AFL Fantasy Wrapped " }
+                    }
+                    ul("nav nav-pills mx-3") {
+                        li("nav-item") {
+                            a("/", classes = "nav-link active") {
+                                +"Home"
+                            }
+                        }
+                        li("nav-item") {
+                            a("/about", classes = "nav-link") {
+                                +"About"
+                            }
+                        }
+                    }
                 }
             }
         }

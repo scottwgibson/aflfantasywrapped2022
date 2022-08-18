@@ -10,25 +10,9 @@ import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonTrade
 data class WrappedData(
     val playerStats: Map<PlayerId, Player>,
     val rounds: Map<Int, ClassicTeamRound>,
-    val snapshot: ClassicTeamSnapshot,
-    val captainData: SeasonCaptainData,
-    val seasonTradeData: SeasonTradeData
+    val snapshot: ClassicTeamSnapshot
 ) {
     val userId = rounds.values.first().userId
-}
-
-object FantasyWrappedService {
-    fun createWrapped(
-        playerData: Map<PlayerId, Player>,
-        rounds: Map<Int, ClassicTeamRound>,
-        snapshot: ClassicTeamSnapshot
-    ): WrappedData {
-        return WrappedData(
-            playerData,
-            rounds,
-            snapshot,
-            SeasonCaptainData(playerData, rounds),
-            SeasonTradeData(playerData, rounds)
-        )
-    }
+    val captainData = SeasonCaptainData(playerStats, rounds)
+    val seasonTradeData = SeasonTradeData(playerStats, rounds)
 }

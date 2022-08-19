@@ -6,6 +6,7 @@ import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HTML
 import kotlinx.html.div
+import kotlinx.html.p
 
 class AboutPage : Template<HTML> {
     override fun HTML.apply() {
@@ -14,6 +15,8 @@ class AboutPage : Template<HTML> {
                 insert(Header()) {}
                 div("container-fluid text-white p-0 wrapped-container vh-100") {
                     div("d-flex align-items-center p-2 flex-column") {
+                        p { +"Created by Scott Gibson" }
+                        p { +"Unofficial fan project not associated with the AFL" }
                     }
                 }
             }

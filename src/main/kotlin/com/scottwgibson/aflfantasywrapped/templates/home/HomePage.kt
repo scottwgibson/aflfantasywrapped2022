@@ -23,7 +23,7 @@ class HomePage : Template<HTML> {
                     form(action = "/search") {
                         div(classes = "input-group d-flex flex-column pt-5 text-white") {
                             div("d-flex align-items-center flex-column") {
-                                p() { +"Team ID" }
+                                p() { +"User ID" }
                                 div("row col-8") {
                                     input(type = InputType.text, name = "userId") {
                                         placeholder = "Eg. 1758489"
@@ -35,6 +35,7 @@ class HomePage : Template<HTML> {
                                 div("row p-3") {
                                     h3 { +"OR" }
                                 }
+                                p() { +"Share Link" }
                                 div("row col-8") {
                                     input(type = InputType.text, name = "sharelink") {
                                         placeholder =

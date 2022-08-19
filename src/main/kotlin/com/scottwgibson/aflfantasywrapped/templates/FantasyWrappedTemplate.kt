@@ -1,11 +1,13 @@
 package com.scottwgibson.aflfantasywrapped.templates
 
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.EndingCarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.WelcomeCarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.CaptainCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.rank.RankCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.squad.SquadCarouselSection
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.trades.TradeCarouselSection
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.ButtonType
@@ -36,7 +38,8 @@ class FantasyWrappedTemplate(
                                     insert(RankCarouselSection(wrappedData)) {}
                                     insert(SquadCarouselSection(wrappedData)) {}
                                     insert(CaptainCarouselSection(wrappedData)) {}
-
+                                    insert(TradeCarouselSection(wrappedData)) {}
+                                    insert(CarouselItem(EndingCarouselItem(wrappedData))) {}
                                 }
                                 button(classes = "carousel-control-prev") {
                                     type = ButtonType.button

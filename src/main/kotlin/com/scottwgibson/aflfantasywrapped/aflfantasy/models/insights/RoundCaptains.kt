@@ -5,12 +5,12 @@ import com.scottwgibson.aflfantasywrapped.aflfantasy.models.roundScore
 
 data class RoundCaptains(
     val round: Int,
-    val captain: Player,
-    val viceCaptain: Player
+    val captain: Player?,
+    val viceCaptain: Player?
 ) {
-    fun loopholeUsed(): Boolean = captain.roundScore(round) == null && viceCaptain.roundScore(round) != null
+    fun loopholeUsed(): Boolean = captain?.roundScore(round) == null && viceCaptain?.roundScore(round) != null
 
-    fun finalCaptainScore(): Int = captain.roundScore(round) ?: viceCaptain.roundScore(round) ?: 0
+    fun finalCaptainScore(): Int = captain?.roundScore(round) ?: viceCaptain?.roundScore(round) ?: 0
 
-    fun finalCaptain(): Player = if (loopholeUsed()) viceCaptain else captain
+    fun finalCaptain(): Player? = if (loopholeUsed()) viceCaptain else captain
 }

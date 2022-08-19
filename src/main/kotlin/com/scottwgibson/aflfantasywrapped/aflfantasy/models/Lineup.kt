@@ -18,8 +18,8 @@ data class Bench(
 
 @Serializable
 data class Lineup(
-    val captain: PlayerId,
-    @SerialName("vice_captain") val viceCaptain: PlayerId,
+    val captain: PlayerId? = null,
+    @SerialName("vice_captain") val viceCaptain: PlayerId? = null,
     @SerialName("1") val defenders: Set<PlayerId> = emptySet(),
     @SerialName("2") val midfielders: Set<PlayerId> = emptySet(),
     @SerialName("3") val rucks: Set<PlayerId> = emptySet(),

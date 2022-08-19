@@ -10,7 +10,7 @@ class SeasonCaptainData(
 ) {
     val roundCaptains = rounds
         .mapValues { it.value.lineup.captain to it.value.lineup.viceCaptain }
-        .mapValues { RoundCaptains(it.key, playerData[it.value.first]!!, playerData[it.value.second]!!) }
+        .mapValues { RoundCaptains(it.key, playerData[it.value.first], playerData[it.value.second]) }
 
     fun timesLoopholeUsed() = roundCaptains.count { it.value.loopholeUsed() }
 

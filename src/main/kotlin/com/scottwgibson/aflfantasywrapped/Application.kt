@@ -3,6 +3,7 @@ package com.scottwgibson.aflfantasywrapped
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.aflFantasyClientConfig
 import com.scottwgibson.aflfantasywrapped.plugins.configureSerialization
+import com.scottwgibson.aflfantasywrapped.templates.about.AboutPage
 import com.scottwgibson.aflfantasywrapped.templates.home.HomePage
 import io.ktor.client.HttpClient
 import io.ktor.server.application.Application
@@ -52,6 +53,10 @@ fun Application.module(
         get("/user/{userId}") {
             val teamId = call.parameters["userId"]?.toInt()!!
             server.showWrapupForUser(call, teamId)
+        }
+
+        get("/about") {
+            call.respondHtmlTemplate(AboutPage()) {}
         }
 
         static("/static") {

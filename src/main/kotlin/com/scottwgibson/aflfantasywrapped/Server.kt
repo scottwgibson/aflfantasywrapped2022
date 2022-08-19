@@ -2,6 +2,7 @@ package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamRound
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ShareLink
 import com.scottwgibson.aflfantasywrapped.services.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.FantasyWrappedTemplate
 import io.ktor.server.application.ApplicationCall
@@ -11,7 +12,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import org.slf4j.LoggerFactory
+import java.util.Base64
 
 @OptIn(ExperimentalSerializationApi::class)
 class Server(
@@ -19,6 +23,19 @@ class Server(
 ) {
 
     private val logger = LoggerFactory.getLogger("Server")
+
+    suspend fun extractUserIdFromShareLink(link: String): Int {
+        return link.split("classic_team/")
+            .last()
+            .let {
+                val sharelink: ShareLink = Json.decodeFromStream(Base64.getDecoder().decode(it).inputStream())
+                if (sharelink.isAndroid()) {
+                    sharelink.team_id
+                } else {
+                    aflFantasyClient.getClassicTeam(sharelink.team_id).userId
+                }
+            }
+    }
 
     suspend fun showWrapupForTeam(call: ApplicationCall, teamId: Int) {
         val players = aflFantasyClient.getPlayers()

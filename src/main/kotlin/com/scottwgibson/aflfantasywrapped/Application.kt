@@ -15,10 +15,6 @@ import io.ktor.server.http.content.staticBasePackage
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.decodeFromStream
-import java.util.Base64
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -42,7 +38,7 @@ fun Application.module(
             val userId = if (userIdParam?.isNotEmpty() == true) {
                 userIdParam.toInt()
             } else if (sharelinkParam?.isNotEmpty() == true) {
-                sharelinkParam.toUserId()
+                server.extractUserIdFromShareLink(sharelinkParam)
             } else null
 
             if (userId != null) {
@@ -64,13 +60,4 @@ fun Application.module(
             resources(".")
         }
     }
-}
-
-fun String?.toUserId(): Int? {
-    return this?.split("classic_team/")
-        ?.last()
-        ?.let {
-            val json: JsonObject = Json.decodeFromStream(Base64.getDecoder().decode(it).inputStream())
-            json["team_id"].toString().toInt()
-        }
 }

@@ -28,7 +28,7 @@ class TestWrappedTemplate(
                     attributes["data-bs-wrap"] = "false"
 
                     div(classes = "carousel-indicators") {
-                        playerIds.forEachIndexed { i, it ->
+                        playerIds.forEachIndexed { i, _ ->
                             button(classes = "active") {
                                 type = ButtonType.button
                                 attributes["data-bs-target"] = "#carouselExampleControls"

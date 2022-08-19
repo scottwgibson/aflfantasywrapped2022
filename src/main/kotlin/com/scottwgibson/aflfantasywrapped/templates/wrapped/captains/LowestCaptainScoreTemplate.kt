@@ -20,13 +20,15 @@ class LowestCaptainScoreTemplate(
             }
 
             captainData.orderedByScoreAsc().take(5).forEach {
-                val score = it.finalCaptainScore()
-                val selectedAs = if (it.loopholeUsed()) "VC" else "C"
-                val round = it.round
-                val bracketData = "R$round $selectedAs"
-                insert(PlayerRowTemplate(it.finalCaptain())) {
-                    column1 { +"$score" }
-                    column4 { +bracketData }
+                it.finalCaptain()?.let { player ->
+                    val score = it.finalCaptainScore()
+                    val selectedAs = if (it.loopholeUsed()) "VC" else "C"
+                    val round = it.round
+                    val bracketData = "R$round $selectedAs"
+                    insert(PlayerRowTemplate(player)) {
+                        column1 { +"$score" }
+                        column4 { +bracketData }
+                    }
                 }
             }
         }

@@ -19,14 +19,16 @@ class HighestCaptainsScoreTemplate(
                 }
             }
 
-            captainData.orderedByScoreDesc().take(5).forEachIndexed { i, it ->
+            captainData.orderedByScoreDesc().take(5).forEach {
                 val score = it.finalCaptainScore()
                 val selectedAs = if (it.loopholeUsed()) "VC" else "C"
                 val round = it.round
                 val bracketData = "R$round $selectedAs"
-                insert(PlayerRowTemplate(it.finalCaptain())) {
-                    column1 { +"$score" }
-                    column4 { +bracketData }
+                it.finalCaptain()?.let { player ->
+                    insert(PlayerRowTemplate(player)) {
+                        column1 { +"$score" }
+                        column4 { +bracketData }
+                    }
                 }
             }
         }

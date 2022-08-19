@@ -19,9 +19,11 @@ class TopCaptainSelectionTemplate(
                 }
             }
             captainData.orderedByUsedDesc().take(5).forEachIndexed { i, player ->
-                insert(PlayerRowTemplate(player.first)) {
-                    column1 { +"#${i + 1}" }
-                    column4 { +"${player.second.size}" }
+                player.first?.let {
+                    insert(PlayerRowTemplate(it)) {
+                        column1 { +"#${i + 1}" }
+                        column4 { +"${player.second.size}" }
+                    }
                 }
             }
         }

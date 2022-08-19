@@ -28,6 +28,7 @@ class SeasonCaptainData(
 
     fun orderedByLoopholeDesc() = roundCaptains.values.asSequence().filter { it.loopholeUsed() }
         .map { it.captain }
+        .filterNotNull()
         .groupBy { it }
         .toList()
         .sortedByDescending { it.second.count() }

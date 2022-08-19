@@ -24,7 +24,7 @@ class MostUsedLoopholeTemplate(
                 }
             }
 
-            captainData.orderedByLoopholeDesc().take(5).forEachIndexed { i, player ->
+            loopholes.forEach { player ->
                 insert(PlayerRowTemplate(player.first)) {
                     column1 { +"${player.second.size}" }
                 }

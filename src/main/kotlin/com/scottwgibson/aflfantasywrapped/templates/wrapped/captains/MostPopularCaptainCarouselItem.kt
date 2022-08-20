@@ -1,7 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.captains
 
-import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import io.ktor.server.html.Template
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.div
@@ -12,7 +11,7 @@ class MostPopularCaptainCarouselItem(
     private val wrappedData: WrappedData
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
-        val data = SeasonCaptainData(wrappedData.playerStats, wrappedData.rounds)
+        val data = wrappedData.captainData
         val player = data.orderedByUsedDesc().first().first
         val selections = data.orderedByUsedDesc().first().second.count()
 

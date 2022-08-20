@@ -1,8 +1,9 @@
 package com.scottwgibson.aflfantasywrapped.templates
 
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.EndingCarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.WelcomeCarouselItem
+import com.scottwgibson.aflfantasywrapped.templates.wrapped.byes.ByeCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.captains.CaptainCarouselSection
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.rank.RankCarouselSection
@@ -38,6 +39,7 @@ class FantasyWrappedTemplate(
                                     insert(RankCarouselSection(wrappedData)) {}
                                     insert(SquadCarouselSection(wrappedData)) {}
                                     insert(CaptainCarouselSection(wrappedData)) {}
+                                    insert(ByeCarouselSection(wrappedData)) {}
                                     insert(TradeCarouselSection(wrappedData)) {}
                                     insert(CarouselItem(EndingCarouselItem(wrappedData))) {}
                                 }

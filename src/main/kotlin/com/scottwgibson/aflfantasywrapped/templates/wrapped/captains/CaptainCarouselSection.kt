@@ -1,6 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.captains
 
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.TextCarouselTemplate
 import io.ktor.server.html.Template
@@ -18,7 +18,6 @@ class CaptainCarouselSection(
                 )
             )
         ) {}
-        insert(CarouselItem(MostPopularCaptainCarouselItem(wrappedData))) {}
         insert(CarouselItem(TopCaptainSelectionTemplate(wrappedData.captainData))) {}
         insert(
             CarouselItem(
@@ -28,11 +27,10 @@ class CaptainCarouselSection(
             )
         ) {}
         insert(CarouselItem(HighestCaptainsScoreTemplate(wrappedData.captainData))) {}
-
         insert(
             CarouselItem(
                 TextCarouselTemplate(
-                    "And your not so best?"
+                    "And the rest?"
                 )
             )
         ) {}
@@ -45,5 +43,6 @@ class CaptainCarouselSection(
             )
         ) {}
         insert(CarouselItem(MostUsedLoopholeTemplate(wrappedData.captainData))) {}
+        insert(CarouselItem(CalvinsCaptainsTemplate(wrappedData.captainData))) {}
     }
 }

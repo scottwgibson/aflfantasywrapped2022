@@ -1,4 +1,4 @@
-package com.scottwgibson.aflfantasywrapped.templates.wrapped.trades
+package com.scottwgibson.aflfantasywrapped.templates.wrapped.byes
 
 import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
@@ -7,18 +7,17 @@ import io.ktor.server.html.Template
 import io.ktor.server.html.insert
 import kotlinx.html.HtmlBlockTag
 
-class TradeCarouselSection(
+class ByeCarouselSection(
     val wrappedData: WrappedData
 ) : Template<HtmlBlockTag> {
     override fun HtmlBlockTag.apply() {
         insert(
             CarouselItem(
                 TextCarouselTemplate(
-                    "Lets take a look at how you traded"
+                    "The byes are a break for players but not for us coaches, how well did you handle them?"
                 )
             )
         ) {}
-        insert(CarouselItem(InstantRewardTradeTemplate(wrappedData.seasonTradeData))) {}
-        insert(CarouselItem(HindsightTradeTemplate(wrappedData.seasonTradeData))) {}
+        insert(CarouselItem(ByeRankChangeTemplate(wrappedData.byeData))) {}
     }
 }

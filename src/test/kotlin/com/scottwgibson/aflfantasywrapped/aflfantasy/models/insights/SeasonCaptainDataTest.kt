@@ -18,6 +18,14 @@ class SeasonCaptainDataTest {
         4 to mockPlayer(4, listOf(null, null, 100).toRoundScores())
     )
 
+    private val calvinsCaptainsData = CalvinsCaptainsData(
+        mapOf(
+            "1" to listOf(1, 2, 3),
+            "2" to listOf(4, 5, 1),
+            "3" to listOf(4, 5, 6)
+        )
+    )
+
     @Test
     fun `test average captain and ordered captain score`() {
         val rounds = listOf(
@@ -26,13 +34,25 @@ class SeasonCaptainDataTest {
             Lineup(2, 3)
         ).toClassicRounds()
 
-        val data = SeasonCaptainData(mockPlayers, rounds)
+        val data = SeasonCaptainData(mockPlayers, rounds, calvinsCaptainsData)
 
         assertEquals(listOf(100, 90, 30).average(), data.averageCaptainScore())
         assertEquals(
             listOf(100, 90, 30),
             data.orderedByScoreDesc().map { it.finalCaptainScore() }
         )
+    }
+
+    @Test
+    fun `test calvins captains calculation`() {
+        val rounds = listOf(
+            Lineup(1, 2),
+            Lineup(1, 2),
+            Lineup(1, 2)
+        ).toClassicRounds()
+
+        val data = SeasonCaptainData(mockPlayers, rounds, calvinsCaptainsData)
+        assertEquals(2, data.timesUsingCalvinsTop3())
     }
 
     @Test
@@ -44,7 +64,7 @@ class SeasonCaptainDataTest {
         )
             .toClassicRounds()
 
-        val data = SeasonCaptainData(mockPlayers, rounds)
+        val data = SeasonCaptainData(mockPlayers, rounds, calvinsCaptainsData)
         assertEquals(2, data.timesLoopholeUsed())
     }
 

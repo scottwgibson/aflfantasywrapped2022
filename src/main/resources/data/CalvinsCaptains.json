@@ -1,107 +1,119 @@
 {
-  "0": [
-    "Jack Steele",
-    "Jack Macrae",
-    "Clayton Oliver"
-  ],
-  "1": [
-    "Touk Miller",
-    "Christian Petracca",
-    "Clayton Oliver"
-  ],
-  "2": [
-    "Touk Miller",
-    "Andrew Brayshaw",
-    "Christian Petracca"
-  ],
-  "3": [
-    "Jack Steele",
-    "Patrick Cripps",
-    "Christian Petracca"
-  ],
-  "4": [
-    "Jack Steele",
-    "Touk Miller",
-    "Josh Dunkley"
-  ],
-  "5": [
-    "Bailey Smith",
-    "Max Gawn",
-    "Christian Petracca"
-  ],
-  "6": [
-    "Max Gawn",
-    "Clayton Oliver",
-    "Jack Steele"
-  ],
-  "7": [
-    "Callum Mills",
-    "Andrew Brayshaw",
-    "Josh Dunkley"
-  ],
-  "8": [
-    "Clayton Oliver",
-    "Andrew Brayshaw",
-    "Christian Petracca"
-  ],
-  "9": [
-    "Jack Macrae",
-    "Christian Petracca",
-    "Josh Dunkley"
-  ],
-  "10": [
-    "Callum Mills",
-    "Josh Dunkley",
-    "Christian Petracca"
-  ],
-  "11": [
-    "Josh Dunkley",
-    "Rory Laird",
-    "Callum Mills"
-  ],
-  "12": [
-    "Andrew Brayshaw",
-    "Josh Kelly",
-    "Max Gawn"
-  ],
-  "13": [
-    "Touk Miller",
-    "Rory Laird",
-    "Cameron Guthrie"
-  ],
-  "14": [
-    "Clayton Oliver",
-    "Jack Macrae",
-    "Lachie Neale"
-  ],
-  "15": [
-    "Sam Docherty",
-    "Jack Macrae",
-    "Callum Mills"
-  ],
-  "16": [
-    "Lachie Neale",
-    "Rory Laird",
-    "Touk Miller"
-  ],
-  "17": [
-    "Rory Laird",
-    "Andrew Brayshaw",
-    "Zach Merrett"
-  ],
-  "18": [
-    "Callum Mills",
-    "Rory Laird",
-    "Zach Merrett"
-  ],
-  "19": [
-    "Rory Laird",
-    "Callum Mills",
-    "Touk Miller"
-  ],
-  "20": [
-    "Rory Laird",
-    "Callum Mills",
-    "Clayton Oliver"
-  ]
+  "rounds": {
+    "1": [
+      296205,
+      295467,
+      996701
+    ],
+    "2": [
+      298272,
+      298210,
+      996701
+    ],
+    "3": [
+      298272,
+      1002232,
+      298210
+    ],
+    "4": [
+      296205,
+      990704,
+      298210
+    ],
+    "5": [
+      296205,
+      298272,
+      993834
+    ],
+    "6": [
+      1006130,
+      290528,
+      298210
+    ],
+    "7": [
+      290528,
+      996701,
+      296205
+    ],
+    "8": [
+      993905,
+      1002232,
+      993834
+    ],
+    "9": [
+      996701,
+      1002232,
+      298210
+    ],
+    "10": [
+      295467,
+      298210,
+      993834
+    ],
+    "11": [
+      993905,
+      993834,
+      298210
+    ],
+    "12": [
+      993834,
+      293222,
+      993905
+    ],
+    "13": [
+      1002232,
+      296347,
+      290528
+    ],
+    "14": [
+      298272,
+      293222,
+      290550
+    ],
+    "15": [
+      996701,
+      295467,
+      293535
+    ],
+    "16": [
+      295518,
+      295467,
+      993905
+    ],
+    "17": [
+      293535,
+      293222,
+      298272
+    ],
+    "18": [
+      293222,
+      1002232,
+      992016
+    ],
+    "19": [
+      993905,
+      293222,
+      992016
+    ],
+    "20": [
+      293222,
+      993905,
+      298272
+    ],
+    "21": [
+      293222,
+      993905,
+      996701
+    ],
+    "22": [
+      293222,
+      993905,
+      296205
+    ],
+    "23": [
+      298272,
+      295518,
+      992468
+    ]
+  }
 }

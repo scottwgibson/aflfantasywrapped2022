@@ -1,6 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.rank
 
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import io.ktor.server.html.Template
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.div

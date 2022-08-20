@@ -6,7 +6,8 @@ import com.scottwgibson.aflfantasywrapped.aflfantasy.models.PlayerId
 
 class SeasonCaptainData(
     playerData: Map<PlayerId, Player>,
-    rounds: Map<Int, ClassicTeamRound>
+    rounds: Map<Int, ClassicTeamRound>,
+    private val calvinsCaptainsData: CalvinsCaptainsData
 ) {
     val roundCaptains = rounds
         .mapValues { it.value.lineup.captain to it.value.lineup.viceCaptain }
@@ -32,4 +33,10 @@ class SeasonCaptainData(
         .groupBy { it }
         .toList()
         .sortedByDescending { it.second.count() }
+
+    fun timesUsingCalvinsTop3() = roundCaptains.count { roundCaptains ->
+        roundCaptains.value.finalCaptain()?.let { player ->
+            calvinsCaptainsData.rounds[roundCaptains.key.toString()]?.contains(player.id)
+        } ?: false
+    }
 }

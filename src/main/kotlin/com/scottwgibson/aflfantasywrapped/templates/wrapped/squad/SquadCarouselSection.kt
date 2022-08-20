@@ -1,6 +1,6 @@
 package com.scottwgibson.aflfantasywrapped.templates.wrapped.squad
 
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.CarouselItem
 import com.scottwgibson.aflfantasywrapped.templates.wrapped.misc.TextCarouselTemplate
 import io.ktor.server.html.Template

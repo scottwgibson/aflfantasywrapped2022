@@ -33,4 +33,10 @@ class SeasonTradeData(
         it.value.tradeIn.map { player -> round to player }
     }
         .sortedByDescending { it.second.roundScore(it.first) }
+
+    fun tradeOutsByRoundScoreDesc() = roundTrades.flatMap {
+        val round = it.key
+        it.value.tradeOut.map { player -> round to player }
+    }
+        .sortedByDescending { it.second.roundScore(it.first) }
 }

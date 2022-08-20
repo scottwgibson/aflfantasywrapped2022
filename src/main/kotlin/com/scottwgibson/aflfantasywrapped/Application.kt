@@ -2,6 +2,7 @@ package com.scottwgibson.aflfantasywrapped
 
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.aflFantasyClientConfig
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.CalvinsCaptainsData
 import com.scottwgibson.aflfantasywrapped.plugins.configureSerialization
 import com.scottwgibson.aflfantasywrapped.templates.about.AboutPage
 import com.scottwgibson.aflfantasywrapped.templates.home.HomePage
@@ -15,6 +16,8 @@ import io.ktor.server.http.content.staticBasePackage
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -24,7 +27,13 @@ fun Application.module(
     configureSerialization()
 
     val aflFantasyClientConfig = environment.config.aflFantasyClientConfig()
-    val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig))
+    val calvinsCaptains: CalvinsCaptainsData =
+        this::class.java.classLoader.getResource("data/CalvinsCaptains.json")
+            ?.openStream()
+            ?.let { Json.decodeFromStream(it) }
+            ?: throw Exception("Unable to load calvin's captain data")
+
+    val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig), calvinsCaptains)
 
     routing {
         get {

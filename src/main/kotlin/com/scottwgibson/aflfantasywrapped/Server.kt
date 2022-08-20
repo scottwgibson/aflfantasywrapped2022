@@ -3,7 +3,8 @@ package com.scottwgibson.aflfantasywrapped
 import com.scottwgibson.aflfantasywrapped.aflfantasy.clients.AflFantasyClient
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ClassicTeamRound
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.ShareLink
-import com.scottwgibson.aflfantasywrapped.services.WrappedData
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.CalvinsCaptainsData
+import com.scottwgibson.aflfantasywrapped.models.WrappedData
 import com.scottwgibson.aflfantasywrapped.templates.FantasyWrappedTemplate
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.html.respondHtmlTemplate
@@ -19,9 +20,9 @@ import java.util.Base64
 
 @OptIn(ExperimentalSerializationApi::class)
 class Server(
-    private val aflFantasyClient: AflFantasyClient
+    private val aflFantasyClient: AflFantasyClient,
+    private val calvinsCaptainsData: CalvinsCaptainsData
 ) {
-
     private val logger = LoggerFactory.getLogger("Server")
 
     suspend fun extractUserIdFromShareLink(link: String): Int {
@@ -36,26 +37,14 @@ class Server(
                 }
             }
     }
-
-    suspend fun showWrapupForTeam(call: ApplicationCall, teamId: Int) {
-        val players = aflFantasyClient.getPlayers()
-        val team = aflFantasyClient.getClassicTeam(teamId)
-        val rounds = getAllRounds(teamId)
-        val snapshot = aflFantasyClient.getClassicTeamSnapshot(team.userId)
-
-        // Create wrapped
-        val wrapped = WrappedData(players, rounds, snapshot)
-        // Render
-        call.respondHtmlTemplate(FantasyWrappedTemplate(wrapped)) {}
-    }
-
+    
     suspend fun showWrapupForUser(call: ApplicationCall, userId: Int) {
         val players = aflFantasyClient.getPlayers()
         val snapshot = aflFantasyClient.getClassicTeamSnapshot(userId)
         val rounds = getAllRounds(snapshot.id)
 
         // Create wrapped
-        val wrapped = WrappedData(players, rounds, snapshot)
+        val wrapped = WrappedData(players, rounds, snapshot, calvinsCaptainsData)
         // Render
         call.respondHtmlTemplate(FantasyWrappedTemplate(wrapped)) {}
     }

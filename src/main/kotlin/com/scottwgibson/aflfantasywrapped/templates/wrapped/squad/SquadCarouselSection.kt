@@ -19,13 +19,6 @@ class SquadCarouselSection(
             )
         ) {}
         insert(CarouselItem(FinalSquadTemplate(wrappedData))) {}
-        insert(
-            CarouselItem(
-                TextCarouselTemplate(
-                    "Just how unique was your final starting 22?"
-                )
-            )
-        ) {}
         insert(CarouselItem(UniqueTableTemplate(wrappedData.finalSquadData))) {}
         insert(
             CarouselItem(

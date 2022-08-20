@@ -15,14 +15,22 @@ import kotlinx.html.ButtonType
 import kotlinx.html.HTML
 import kotlinx.html.button
 import kotlinx.html.div
+import kotlinx.html.head
 import kotlinx.html.id
+import kotlinx.html.meta
 import kotlinx.html.span
 
 class FantasyWrappedTemplate(
-    val wrappedData: WrappedData
+    val wrappedData: WrappedData,
+    val shareUrl: String
 ) : Template<HTML> {
     override fun HTML.apply() {
         insert(MainTemplate()) {
+            head {
+                meta(name = "twitter:card", content = "summary") { }
+                meta(name = "twitter:title", content = "${wrappedData.snapshot.name} 2022 Wrapped") { }
+                meta(name = "twitter:description", content = " Unofficial AFL Fantasy season review") { }
+            }
             body {
                 div(classes = "container-fluid wrapped-container text-white") {
                     div(classes = "row") {
@@ -41,7 +49,7 @@ class FantasyWrappedTemplate(
                                     insert(CaptainCarouselSection(wrappedData)) {}
                                     insert(ByeCarouselSection(wrappedData)) {}
                                     insert(TradeCarouselSection(wrappedData)) {}
-                                    insert(CarouselItem(EndingCarouselItem(wrappedData))) {}
+                                    insert(CarouselItem(EndingCarouselItem(wrappedData, shareUrl))) {}
                                 }
                                 button(classes = "carousel-control-prev") {
                                     type = ButtonType.button

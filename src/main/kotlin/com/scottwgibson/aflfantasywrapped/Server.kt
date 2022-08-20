@@ -21,7 +21,8 @@ import java.util.Base64
 @OptIn(ExperimentalSerializationApi::class)
 class Server(
     private val aflFantasyClient: AflFantasyClient,
-    private val calvinsCaptainsData: CalvinsCaptainsData
+    private val calvinsCaptainsData: CalvinsCaptainsData,
+    private val shareUrl: String
 ) {
     private val logger = LoggerFactory.getLogger("Server")
 
@@ -37,7 +38,7 @@ class Server(
                 }
             }
     }
-    
+
     suspend fun showWrapupForUser(call: ApplicationCall, userId: Int) {
         val players = aflFantasyClient.getPlayers()
         val snapshot = aflFantasyClient.getClassicTeamSnapshot(userId)
@@ -46,7 +47,7 @@ class Server(
         // Create wrapped
         val wrapped = WrappedData(players, rounds, snapshot, calvinsCaptainsData)
         // Render
-        call.respondHtmlTemplate(FantasyWrappedTemplate(wrapped)) {}
+        call.respondHtmlTemplate(FantasyWrappedTemplate(wrapped, shareUrl)) {}
     }
 
     private suspend fun getAllRounds(teamId: Int): Map<Int, ClassicTeamRound> = coroutineScope {

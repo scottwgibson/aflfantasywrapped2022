@@ -27,13 +27,14 @@ fun Application.module(
     configureSerialization()
 
     val aflFantasyClientConfig = environment.config.aflFantasyClientConfig()
+    val shareUrl = environment.config.property("social.url").getString()
     val calvinsCaptains: CalvinsCaptainsData =
         this::class.java.classLoader.getResource("data/CalvinsCaptains.json")
             ?.openStream()
             ?.let { Json.decodeFromStream(it) }
             ?: throw Exception("Unable to load calvin's captain data")
 
-    val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig), calvinsCaptains)
+    val server = Server(AflFantasyClient(httpClient, aflFantasyClientConfig), calvinsCaptains, shareUrl)
 
     routing {
         get {

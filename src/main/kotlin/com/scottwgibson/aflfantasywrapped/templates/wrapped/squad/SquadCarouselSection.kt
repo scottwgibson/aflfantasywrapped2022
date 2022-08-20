@@ -22,6 +22,14 @@ class SquadCarouselSection(
         insert(
             CarouselItem(
                 TextCarouselTemplate(
+                    "Just how unique was your final starting 22?"
+                )
+            )
+        ) {}
+        insert(CarouselItem(UniqueTableTemplate(wrappedData.finalSquadData))) {}
+        insert(
+            CarouselItem(
+                TextCarouselTemplate(
                     "Let's take a look at your round 1 team"
                 )
             )

@@ -10,13 +10,20 @@ import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.form
 import kotlinx.html.h3
+import kotlinx.html.head
 import kotlinx.html.input
+import kotlinx.html.meta
 import kotlinx.html.p
 import kotlinx.html.small
 
 class HomePage : Template<HTML> {
     override fun HTML.apply() {
         insert(MainTemplate()) {
+            head {
+                meta(name = "twitter:card", content = "summary") { }
+                meta(name = "twitter:title", content = "Unofficial 2022 AFL Fantasy Wrapped") { }
+                meta(name = "twitter:description", content = "See your fantasy classic season in review") { }
+            }
             body {
                 insert(Header()) {}
                 div("container-fluid p-0 wrapped-container vh-100") {

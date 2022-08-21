@@ -44,6 +44,7 @@ class Server(
         val snapshot = aflFantasyClient.getClassicTeamSnapshot(userId)
         val rounds = getAllRounds(snapshot.id)
 
+        logger.info("snapshot.${snapshot.id}.${snapshot.name}")
         // Create wrapped
         val wrapped = WrappedData(players, rounds, snapshot, calvinsCaptainsData)
         // Render

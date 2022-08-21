@@ -21,7 +21,9 @@ data class PlayerStats(
     @SerialName("career_avg") val careerAvg: Float,
     val tog: Int,
     @SerialName("leagues_rostered") val leaguesRosteredPct: Float
-)
+) {
+    fun priceAtRound(round: Int) = prices[round.toString()] ?: 0
+}
 
 @Serializable
 data class Player(

@@ -20,5 +20,7 @@ class TradeCarouselSection(
         ) {}
         insert(CarouselItem(InstantRewardTradeTemplate(wrappedData.seasonTradeData))) {}
         insert(CarouselItem(HindsightTradeTemplate(wrappedData.seasonTradeData))) {}
+        insert(CarouselItem(CashCowTemplate(wrappedData.cashCowData))) {}
+        insert(CarouselItem(CashWoeTemplate(wrappedData.cashCowData))) {}
     }
 }

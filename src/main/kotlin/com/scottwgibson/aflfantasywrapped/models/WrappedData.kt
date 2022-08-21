@@ -6,6 +6,7 @@ import com.scottwgibson.aflfantasywrapped.aflfantasy.models.Player
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.PlayerId
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.ByeData
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.CalvinsCaptainsData
+import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.CashCowData
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.FinalSquadData
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonCaptainData
 import com.scottwgibson.aflfantasywrapped.aflfantasy.models.insights.SeasonTradeData
@@ -21,4 +22,5 @@ data class WrappedData(
     val seasonTradeData = SeasonTradeData(playerStats, rounds)
     val finalSquadData = FinalSquadData(playerStats, rounds)
     val byeData = ByeData(playerStats, rounds, snapshot)
+    val cashCowData = CashCowData(seasonTradeData, rounds)
 }
